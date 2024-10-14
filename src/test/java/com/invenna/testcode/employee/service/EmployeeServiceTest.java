@@ -49,6 +49,7 @@ public class EmployeeServiceTest {
     // Setting up the test data before each test.
     @BeforeEach
     void setup() {
+        System.out.println("Started Testing")
         Department department = new Department();
         department.setId(1L);
         department.setName("IT");
