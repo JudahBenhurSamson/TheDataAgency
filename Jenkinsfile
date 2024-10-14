@@ -27,20 +27,21 @@ pipeline {
                 bat '.\\gradlew.bat --refresh-dependencies build'
             }
         }
-        
-        stage('To Deploy and select local profile') {
-            steps {
-                // Run the application with the Spring profile set to 'local'.
-                bat ".\\gradlew.bat bootRun --args='--spring.profiles.active=local'"
-            }
-        }
-        
+                
         stage('Test') {
             steps {
                 // Execute the Gradle test task.
                 bat '.\\gradlew.bat test'
             }
         }
+        
+        // stage('To Deploy and select local profile') {
+        //     steps {
+        //         // Run the application with the Spring profile set to 'local'.
+        //         bat ".\\gradlew.bat bootRun --args='--spring.profiles.active=local'"
+        //     }
+        // }
+        
     }
 
     post {
