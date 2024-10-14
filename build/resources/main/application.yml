@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: EmployeeService
+
+springdoc:
+  api-docs:
+    enabled: ${ENABLE_SWAGGER_UI:true}
+  swagger-ui:
+    path: /swagger-ui.html
+    try-it-out-enabled: true  # Ensure this property is added and set to true

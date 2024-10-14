@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.invenna.testcode.employee.service.SearchServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-10-14T13:24:59" hostname="JESUS" time="1.434">
+  <properties/>
+  <testcase name="testSearchEmployeesByName()" classname="com.invenna.testcode.employee.service.SearchServiceTest" time="1.421"/>
+  <testcase name="testSearchEmployeesNoResults()" classname="com.invenna.testcode.employee.service.SearchServiceTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
