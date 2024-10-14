@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     environment {
-        GRADLE_HOME = '/path/to/gradle'
-        JAVA_HOME = '/path/to/java'
+         GRADLE_HOME = 'C:\\Program Files\\Gradle\\gradle-5.0-all'
+        JAVA_HOME = 'C:\\Program Files\\Java\\jdk-17'
     }
 
     stages {
         stage('Checkout') {
             steps {
                 // Github URL
-                git url: 'https://github.com/your-repo/spring-boot-app.git', branch: 'main'
+                git url: 'https://github.com/JudahBenhurSamson/TheDataAgency.git', branch: 'main'
             }
         }
 
