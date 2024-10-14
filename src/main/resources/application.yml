@@ -1,6 +1,8 @@
 spring:
   application:
     name: EmployeeService
+server:
+  port: 8081 
 
 springdoc:
   api-docs:
