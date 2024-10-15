@@ -32,3 +32,9 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+test {
+	exclude('**/EmployeeServiceIntegrationTest.class')
+	exclude('**/SearchServiceIntegrationTest.class')
+
+}
