@@ -1,12 +1,11 @@
 package com.invenna.testcode.employee.service;
 
 // Import necessary classes and dependencies for testing
+
 import com.invenna.testcode.employee.models.Department;
 import com.invenna.testcode.employee.models.Employee;
 import com.invenna.testcode.employee.models.EmployeeStatus;
 import io.restassured.RestAssured;
-import io.restassured.config.EncoderConfig;
-import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
@@ -15,6 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+
 
 public class EmployeeServiceIntegrationTest {
 
@@ -31,19 +32,17 @@ public class EmployeeServiceIntegrationTest {
         String departmentName = "testDepartmentName";
         String salary = "50000";
         String employeeStatus = "ACTIVE";
-        String joiningDate = "01-01-2024";
+        LocalDate joiningDate = LocalDate.parse("2005-11-12");
 
         // Create an Employee object using the builder pattern
         Employee req = Employee.builder().id(id).name(name)
                 .department(Department.builder().id(departmentId).name(departmentName).build())
                 .salary(new BigDecimal(salary)).employeeStatus(EmployeeStatus.ACTIVE)
-                .joiningDate(LocalDate.parse(joiningDate))
+                .joiningDate(joiningDate)
                 .build();
 
         // Send a POST request to create the employee
         Response response = RestAssured.given().baseUri(basePath + "/employee")
-                .config(RestAssuredConfig.config().encoderConfig(EncoderConfig.encoderConfig().encodeContentTypeAs("*/*", ContentType.JSON)))
-                .header(new Header("Content-Type", "application/json;charset=utf-8"))
                 .accept(ContentType.ANY)
                 .contentType("application/json;charset=utf-8")
                 .body(req)
@@ -75,13 +74,12 @@ public class EmployeeServiceIntegrationTest {
         String departmentName = "testDepartmentName";
         String salary = "60000";
         String employeeStatus = "ACTIVE";
-        String joiningDate = "01-02-2024";
-
+        LocalDate joiningDate = LocalDate.parse("2005-11-12");
         // Create an Employee object with updated details
         Employee req = Employee.builder().id(id).name(name)
                 .department(Department.builder().id(departmentId).name(departmentName).build())
                 .salary(new BigDecimal(salary)).employeeStatus(EmployeeStatus.ACTIVE)
-                .joiningDate(LocalDate.parse(joiningDate))
+                .joiningDate(joiningDate)
                 .build();
 
         // Send a PUT request to update the employee
@@ -100,6 +98,7 @@ public class EmployeeServiceIntegrationTest {
         // Assert that the response data matches the updated request data
         Assertions.assertEquals(id, responseEmployeeTest.getId());
         Assertions.assertEquals(name, responseEmployeeTest.getName());
+        Assertions.assertEquals(departmentName, responseEmployeeTest.getDepartment().getName());
         Assertions.assertEquals(salary, responseEmployeeTest.getSalary().toString());
         Assertions.assertEquals(employeeStatus, responseEmployeeTest.getEmployeeStatus().toString());
     }
@@ -110,7 +109,7 @@ public class EmployeeServiceIntegrationTest {
         // Initialize test data for the existing employee
         long id = 1;  // Use the ID of the employee to retrieve
         String name = "testName";
-        long departmentId = 1002;
+        long departmentId = 1;
         String departmentName = "testDepartmentName";
         String salary = "50000.0";
         String employeeStatus = "ACTIVE";
@@ -131,6 +130,8 @@ public class EmployeeServiceIntegrationTest {
         // Assert that the response data matches the expected employee details
         Assertions.assertEquals(id, responseEmployee.getId());
         Assertions.assertEquals(name, responseEmployee.getName());
+        Assertions.assertEquals(departmentName, responseEmployee.getDepartment().getName());
+        Assertions.assertEquals(departmentId, responseEmployee.getDepartment().getId());
         Assertions.assertEquals(salary, responseEmployee.getSalary().toString());
         Assertions.assertEquals(employeeStatus, responseEmployee.getEmployeeStatus().toString());
     }
